@@ -3,7 +3,6 @@ const {
     fixBabelImports,
     addLessLoader,
     addDecoratorsLegacy,
-    disableEsLint
 } = require('customize-cra')
 
 const modifyVars=require('./theme')
@@ -19,6 +18,5 @@ module.exports=override(
             modifyVars
         }
     }),
-    addDecoratorsLegacy(),
-    disableEsLint()
+    addDecoratorsLegacy()
 )
