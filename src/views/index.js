@@ -25,6 +25,10 @@ const ArticleEdit = Loadable({
    loader: () => import('./Article/Edit'),
    loading: Loading
 })
+const Notification = Loadable({
+   loader: () => import('./Notification'),
+   loading: Loading
+})
 // import Login from './Login'
 // import NotFound from './NotFound'
 // import Settings from './Settings'
@@ -38,5 +42,6 @@ export {
    Settings,
    Dashboard,
    ArticleList,
-   ArticleEdit
+   ArticleEdit,
+   Notification
 }

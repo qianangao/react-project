@@ -17,8 +17,6 @@ const service=axios.create({
 
  service.interceptors.response.use(response=>{
     const res=response.data
-    console.log(res);
-    
     if(res.code===200){
         return res
     }else{
@@ -27,8 +25,27 @@ const service=axios.create({
     }
  })
 
- export const getArticles=()=>{
-     return service({
-         url: '/api/v1/article'
-     })
+ //获取文章
+ export const getArticles=(offset=0,limited=10)=>{
+     return service.post('/api/v1/article',
+         {
+             offset,
+             limited
+         }
+     )
+ }
+
+ //删除文章
+ export const deleteArticleById=(id)=>{
+     return service.post(`/api/v1/articleDelete/${id}`)
+ }
+
+ //获取文章阅读量
+ export const getArticleAmount=()=>{
+     return service.post('/api/v1/articleAmount')
+ }
+
+ //获取通知中心消息
+ export const getNotifications=()=>{
+     return service.post('/api/v1/notification')
  }

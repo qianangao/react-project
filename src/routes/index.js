@@ -4,7 +4,8 @@ import {
     Settings,
     Dashboard,
     ArticleList,
-    ArticleEdit
+    ArticleEdit,
+    Notification
 } from '../views'
 
 
@@ -24,14 +25,14 @@ export const adminRoutes=[
         pathname: '/admin/dashboard',
         component: Dashboard,
         title:'Dashboard',
-        icon: 'dashboard-outlined',
+        icon: 'dashboard',
         isNav:true
     }, 
     {
         pathname: '/admin/article',
         component: ArticleList,
         title: '文章编辑',
-        icon: 'unordered-list-outlined',
+        icon: 'unordered-list',
         exact:true,
         isNav: true
     },
@@ -40,10 +41,14 @@ export const adminRoutes=[
         component: ArticleEdit
     },
     {
+        pathname: '/admin/notification',
+        component: Notification
+    },
+    {
         pathname: '/admin/settings',
         component: Settings,
         title: '设置',
-        icon: 'setting-outlined',
+        icon: 'setting',
         isNav: true
     },
 ]
