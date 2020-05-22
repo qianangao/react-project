@@ -1,78 +1,76 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import {
-  Card,
-  Form,
-  Input,
-  Button,
-  Checkbox,
-  Spin,
-} from 'antd';
-
-import { getLogin } from '../../actions/users'
-
+import React from 'react'
+import { Form, Input, Button, Checkbox, Card } from 'antd';
+import {withRouter, Redirect} from 'react-router-dom'
+import { connect } from 'react-redux';
+import {login} from '../../actions/user'
 import './login.less'
 
-const mapState = state => ({
-  isLogin: state.users.isLogin,
-  isLoading: state.users.isLoading
-})
 
-@connect(mapState, { getLogin })
-class Login extends Component {
+
+class Login extends React.Component{
+  formRef=React.createRef()
+
+  onFinish = values => {
+    this.props.login(values)
+  };
   render() {
-      const onFinish = values => {
-        // console.log('Success:', values);
-        this.props.getLogin(values)
-      };
-    
-      const onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
-      };
+    const layout = {
+      labelCol: {
+        span: 4
+      },
+      wrapperCol: {
+        span: 16
+      },
+    };
+    const tailLayout = {
+      wrapperCol: {
+        offset: 4
+      },
+    };
+  return (
+    this.props.isLogin?
+    <Redirect to="/admin/dashboard" />
+    :
+    <Card title="登录页面" className="form">
+    <Form
+      {...layout}
+      name="basic"
+      ref={this.formRef}
+      initialValues={{ remember: true }}
+      onFinish={this.onFinish}
+    >
+      <Form.Item
+        label="Username"
+        name="username"
+        rules={[{ required: true, message: 'Please input your username!' }]}
+      >
+        <Input disabled={this.props.isLoading}/>
+      </Form.Item>
 
-    return (
-      this.props.isLogin
-      ?
-      <Redirect to='./admin' />
-      :
-      <Spin spinning={this.props.isLoading}>
-        <Card className='ko-card' title="QF 管理后台登录" bordered={false}>
-          <Form
-          name="basic"
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-        >
-          <Form.Item
-            label="username"
-            name="username"
-            rules={[{ required: true, message: '请输入用户名!' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="password"
-            name="password"
-            rules={[{ required: true, message: '请输入密码!' }]}
-          >
-            <Input.Password />
-          </Form.Item>
-          <div className='bottom'>
-              <Form.Item name="remember" valuePropName="checked">
-                <Checkbox>Remember Me</Checkbox>
-              </Form.Item>
-              <Form.Item>
-              <Button type="primary" htmlType="submit">
-                Login
-              </Button>
-              </Form.Item>
-          </div>
-        </Form>
-        </Card>
-      </Spin>
-    )
-  }
-}
+      <Form.Item
+        label="Password"
+        name="password"
+        rules={[{ required: true, message: 'Please input your password!' }]}
+      >
+        <Input.Password disabled={this.props.isLoading}/>
+      </Form.Item>
 
-export default Login
+      <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+        <Checkbox>Remember me</Checkbox>
+      </Form.Item>
+
+      <Form.Item {...tailLayout}>
+        <Button type="primary" htmlType="submit" loading={this.props.isLoading}>
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
+    </Card>
+  );
+    }
+};
+const mapState=state=>({isLoading:state.user.isLoading,
+isLogin:state.user.isLogin})
+export default connect(mapState, {
+  login
+})(Login)

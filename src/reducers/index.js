@@ -1,4 +1,4 @@
 import {combineReducers} from 'redux'
 import notification from './notifications'
-
-export default combineReducers({notification})
+import user from './user'
+export default combineReducers({notification,user})

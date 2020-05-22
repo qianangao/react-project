@@ -7,6 +7,11 @@ const service=axios.create({
      method:'post'
  })
 
+ const service1 = axios.create({
+     baseURL: isDev ? 'http://rap2.taobao.org:38080/app/mock/254580/' : '',
+     method: 'post'
+ })
+
  service.interceptors.request.use(config=>{
      config.headers['token']='asafasdgfsd'
      return config
@@ -48,4 +53,19 @@ const service=axios.create({
  //获取通知中心消息
  export const getNotifications=()=>{
      return service.post('/api/v1/notification')
+ }
+
+ //获取单个文章
+ export const getArticleById=(id)=>{
+     return service.post(`/api/v1/article/${id}`)
+ }
+
+ //保存单个文章
+ export const saveArticleById=(id,data)=>{
+     return service.post(`/api/v1/articleSave/${id}`,data)
+ }
+
+ //登录
+ export const loginReq=(userInfo)=>{
+     return service1.post('/api/v1/login',userInfo)
  }

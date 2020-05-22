@@ -12,10 +12,7 @@ const mapState=state=>{
         isLoading:state.notification.isLoading
     }
 }
-@connect(mapState, {
-    getMarkNotificationAsReadById,
-    getMarkNotificationAsRead
-})
+
 class Notification extends Component {
     render() {
         console.log(this.props);
@@ -44,4 +41,7 @@ class Notification extends Component {
     }
 }
 
-export default Notification
+export default connect(mapState, {
+    getMarkNotificationAsReadById,
+    getMarkNotificationAsRead
+})(Notification)
