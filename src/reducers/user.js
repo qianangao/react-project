@@ -20,8 +20,16 @@ export default (state=initState,action)=>{
                     avatar: '',
                     displayName: '',
                     isLogin:false,
-                    isLoading: false
+                    isLoading: false,
+                    role:''
             }
+        case actionTypes.CHANGE_AVATAR:
+            return {
+                ...state,
+                avatar:action.payload.imageUrl
+            }
+            console.log(state);
+            
         default:
             return state
     }

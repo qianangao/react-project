@@ -3,7 +3,8 @@ import { Card, List, Button, Avatar,Badge,Spin } from 'antd'
 import {connect} from 'react-redux'
 import {
     getMarkNotificationAsReadById,
-    getMarkNotificationAsRead
+    getMarkNotificationAsRead,
+    getReceivedNotification
 } from '../../actions/notifications'
 
 const mapState=state=>{
@@ -14,9 +15,10 @@ const mapState=state=>{
 }
 
 class Notification extends Component {
+    componentDidMount(){
+        this.props.getReceivedNotification()
+    }
     render() {
-        console.log(this.props);
-        
         const data = this.props.list
         return (
             <Spin spinning={this.props.isLoading}>
@@ -43,5 +45,6 @@ class Notification extends Component {
 
 export default connect(mapState, {
     getMarkNotificationAsReadById,
-    getMarkNotificationAsRead
+    getMarkNotificationAsRead,
+    getReceivedNotification
 })(Notification)

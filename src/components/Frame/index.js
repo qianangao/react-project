@@ -35,8 +35,6 @@ class Frame extends Component {
           
   }
   render() {
-    console.log(this.props);
-    
     const data=this.props.list
     const selectedKeyArr = this.props.location.pathname.split('/')
     selectedKeyArr.length = 3
@@ -53,7 +51,7 @@ class Frame extends Component {
               <Avatar src={this.props.avatar} />
               <Badge count={data.filter(item=>item.hasRead===false).length} offset={[10,20]}><span>欢迎您!{this.props.displayName}</span></Badge>
             </span>}>
-              <Menu.Item key="/admin/settings">个人设置</Menu.Item>
+              <Menu.Item key="/admin/profile">个人设置</Menu.Item>
             <Menu.Item key="/admin/notification"><Badge dot={data.find(item=>item.hasRead===false)}>通知中心</Badge></Menu.Item>
             <Menu.Item key="/logout">退出登录</Menu.Item>
             </SubMenu>

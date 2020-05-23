@@ -111,6 +111,7 @@ export default class ArticleList extends Component {
             })
             const columnsKeys = Object.keys(dataSource[0])
             const columns = this.createColumns(columnsKeys)
+            if(!this.updater.isMounted(this)) return
             this.setState({
                 dataSource,
                 columns,
@@ -121,13 +122,17 @@ export default class ArticleList extends Component {
             console.log(err);
             
         }).finally(()=>{
+            if(!this.updater.isMounted(this)) return
             this.setState({isLoading:false})
         })
     }
 
     componentDidMount() {
+        console.log(this.updater.isMounted(this));  
         this.getArticleList()
     }
+
+    
 
     onPageChange=(page,pageSize)=>{
         this.setState({

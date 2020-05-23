@@ -25,7 +25,6 @@ export const login = (userInfo) => {
     return dispatch => {
         dispatch(startLogin)
         loginReq(userInfo).then(res => {
-            console.log(res);
             if (res.data.code === 200) {
                 if(userInfo.remember===true){
                     window.localStorage.setItem('token', res.data.data.token)
@@ -50,4 +49,12 @@ export const logout=()=>{
         dispatch(loginFailed())
     }
 }
+
+
+export const changeAvatar = (imageUrl) => ({
+    type: actionTypes.CHANGE_AVATAR,
+    payload: {
+        imageUrl
+    }
+})
 

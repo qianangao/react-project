@@ -13,7 +13,13 @@ const service=axios.create({
  })
 
  service.interceptors.request.use(config=>{
-     config.headers['token']='asafasdgfsd'
+     config.headers['token'] = 'dhdhd'
+    //  if (localStorage.token){
+    //      config.headers['token'] = localStorage.token
+    //  }
+    //  else if(sessionStorage.token){
+    //      config.headers['token'] = sessionStorage.token
+    //  }
      return config
  },error=>{
     message.error(error)
@@ -25,6 +31,7 @@ const service=axios.create({
     if(res.code===200){
         return res
     }else{
+        // window.location.href='/login'
        message.error('error')
         
     }

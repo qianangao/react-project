@@ -5,7 +5,9 @@ import {
     Dashboard,
     ArticleList,
     ArticleEdit,
-    Notification
+    Notification,
+    Profile,
+    NoAuth
 } from '../views'
 
 
@@ -26,7 +28,8 @@ export const adminRoutes=[
         component: Dashboard,
         title:'Dashboard',
         icon: 'dashboard',
-        isNav:true
+        isNav:true,
+        role:['001','002','003']
     }, 
     {
         pathname: '/admin/article',
@@ -34,21 +37,35 @@ export const adminRoutes=[
         title: '文章编辑',
         icon: 'unordered-list',
         exact:true,
-        isNav: true
+        isNav: true,
+        role: ['001', '002']
     },
     {
         pathname: '/admin/article/edit/:id',
-        component: ArticleEdit
+        component: ArticleEdit,
+        role: ['001', '002']
     },
     {
         pathname: '/admin/notification',
-        component: Notification
+        component: Notification,
+        role: ['001','002', '003']
+    },
+    {
+        pathname: '/admin/profile',
+        component: Profile,
+        role: ['001', '002', '003']
+    },
+    {
+        pathname: '/admin/noauth',
+        component: NoAuth,
+        role: ['001', '002', '003']
     },
     {
         pathname: '/admin/settings',
         component: Settings,
         title: '设置',
         icon: 'setting',
-        isNav: true
+        isNav: true,
+        role: ['001']
     },
 ]

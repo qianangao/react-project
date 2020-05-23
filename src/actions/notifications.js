@@ -57,7 +57,6 @@ export const getReceivedNotification = () => {
     return dispatch => {
         dispatch(startNotificationPost())
         getNotifications().then(res=>{
-           console.log(res); 
            dispatch(receivedNotification(res.data.list))
             dispatch(finishedNotificationPost())
        })

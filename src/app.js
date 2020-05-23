@@ -19,7 +19,9 @@ class App extends Component {
                     {
                         adminRoutes.map(route=>{
                             return <Route key={route.pathname} path={route.pathname} exact={route.exact}
-                                render={(routeProps)=>{return <route.component {...routeProps}/>}}
+                                render={(routeProps)=>{
+                                    return route.role.includes(this.props.role)?<route.component {...routeProps}/>:<Redirect to="/admin/noauth"/>
+                                    }}
                             />
                         })
                     }
@@ -32,5 +34,6 @@ class App extends Component {
     }
 }
 
-const mapState=state=>({isLogin:state.user.isLogin})
+const mapState=state=>({isLogin:state.user.isLogin,
+role:state.user.role})
 export default connect(mapState)(App)
