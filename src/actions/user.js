@@ -23,7 +23,7 @@ const loginFailed = () => {
 
 export const login = (userInfo) => {
     return dispatch => {
-        dispatch(startLogin)
+        dispatch(startLogin())
         loginReq(userInfo).then(res => {
             if (res.data.code === 200) {
                 if(userInfo.remember===true){

@@ -14,6 +14,7 @@ const service=axios.create({
 
  service.interceptors.request.use(config=>{
      config.headers['token'] = 'dhdhd'
+     
     //  if (localStorage.token){
     //      config.headers['token'] = localStorage.token
     //  }
